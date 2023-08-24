@@ -1,0 +1,29 @@
+.app-header-nav {
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    background-color: #282c34;
+    color: #fff;
+
+    .nav-link {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .left-wrapper {
+        display: grid;
+        align-items: center;
+        grid-template-columns: auto 1fr;
+        grid-column-gap: 2px;
+        text-align: left;
+        grid-column-gap: 10px;
+    }
+
+    .right-wrapper {
+        display: grid;
+        align-items: center;
+        grid-template-columns: auto auto auto;
+        grid-column-gap: 10px;
+    }
+}
