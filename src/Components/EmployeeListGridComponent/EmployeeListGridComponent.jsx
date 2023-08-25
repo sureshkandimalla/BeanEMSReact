@@ -1,13 +1,10 @@
-import React from "react";
-// import { AgGridReact } from "ag-grid-react";
-import { AgGridReact } from "react-ag-grid";
-// // import "ag-grid-community/dist/styles/ag-grid.css";
-// import 'ag-grid-community/dist/ag-grid.css';
-// import "ag-grid-community/dist/styles/ag-theme-balham.css";
+import React, { useState } from "react";
+import { AgGridReact } from "ag-grid-react";
+import columns from '../../Component_JSON/EmployeeList';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import { GridReadyEvent, GridApi, ColumnApi, ColDef } from "ag-grid-community";
-// import { fetchData, fetchLargeData, Athlete } from "./api";
+import './EmployeeListGridComponent.scss';
+import 'ag-grid-enterprise';
 
 
 const Grid = () => {
@@ -25,8 +22,8 @@ const Grid = () => {
         ssn: 'N/A',
         gender: 'Female',
         render: () => <a href='/'>Delete</a>,
-      },
-      {
+    },
+    {
         firstName: 'F2 -asbh -dhsauf -sbfh',
         lastName: 'L2',
         email: 'test@gmail.com',
@@ -40,8 +37,38 @@ const Grid = () => {
         ssn: 'N/A',
         gender: 'Male',
         render: () => <a href='/'>Delete</a>,
-      },
-      {
+    },
+    {
+        firstName: 'F2 -asbh -dhsauf -sbfh',
+        lastName: 'L2',
+        email: 'test@gmail.com',
+        phone: '1234567890',
+        employeeID: '1',
+        dob: '1/09/2000',
+        currentWorkStatus: 'H1B',
+        workAuthStartDate: '15/10/1990',
+        workAuthEndDate: '01/12/2020',
+        taxTerm: 'W2',
+        ssn: 'N/A',
+        gender: 'Male',
+        render: () => <a href='/'>Delete</a>,
+    },
+    {
+        firstName: 'F2 -asbh -dhsauf -sbfh',
+        lastName: 'L2',
+        email: 'test@gmail.com',
+        phone: '1234567890',
+        employeeID: '1',
+        dob: '1/09/2000',
+        currentWorkStatus: 'H1B',
+        workAuthStartDate: '15/10/1990',
+        workAuthEndDate: '01/12/2020',
+        taxTerm: 'W2',
+        ssn: 'N/A',
+        gender: 'Male',
+        render: () => <a href='/'>Delete</a>,
+    },
+    {
         firstName: 'F3',
         lastName: 'L3',
         email: 'test@gmail.com',
@@ -55,8 +82,8 @@ const Grid = () => {
         ssn: 'N/A',
         gender: 'Male',
         render: () => <a href='/'>Delete</a>,
-      },
-      {
+    },
+    {
         firstName: 'F4',
         lastName: 'L4',
         email: 'test@gmail.com',
@@ -70,8 +97,8 @@ const Grid = () => {
         ssn: 'N/A',
         gender: 'Male',
         render: () => <a href='/'>Delete</a>,
-      },
-      {
+    },
+    {
         firstName: 'F5',
         lastName: 'L5',
         email: 'test@gmail.com',
@@ -85,8 +112,8 @@ const Grid = () => {
         ssn: 'N/A',
         gender: 'Female',
         render: () => <a href='/'>Delete</a>,
-      },
-      {
+    },
+    {
         firstName: 'F6',
         lastName: 'L6',
         email: 'test@gmail.com',
@@ -99,52 +126,49 @@ const Grid = () => {
         taxTerm: 'W2',
         ssn: 'N/A',
         gender: 'Male',
-      }]
-
-const columns = [
-    {
-        headerName: 'First Name', field:'firstName', sortable:true, editable: true, filter:true
-    },
-    {
-        headerName: 'Last Name', field:'lastName', sortable:true, editable: true, filter:true
-    },
-    {
-        headerName: 'Email', field:'email', sortable:true, editable: true, filter:true
-    },
-    {
-        headerName: 'Phone', field:'phone', sortable:true, editable: true, filter:true
-    },
-    {
-        headerName: 'Employee ID', field:'employeeID', sortable:true, editable: true, filter:true
-    },
-    {
-        headerName: 'Date of Birth', field:'dob', sortable:true, editable: true, filter:true
-    },
-    {
-        headerName: 'Current Work Status', field:'currentWorkStatus', sortable:true, editable: true, filter:true
-    },
-    {
-        headerName: 'Work Auth Start Date', field:'workAuthStartDate', sortable:true, editable: true, filter:true
-    },
-    {
-        headerName: 'Work Auth End Date', field:'workAuthEndDate', sortable:true, editable: true, filter:true
-    },
-    {
-        headerName: 'Tax Term', field:'taxTerm', sortable:true, editable: true, filter:true
-    },
-    {
-        headerName: 'SSN', field:'ssn', sortable:true, editable: true, filter:true
-    },
-    {
-        headerName: 'Gender', field:'gender', sortable:true, editable: true, filter:true
-    }
-]
+    }];
 
     return (
-        <div className="ag-theme-alpine" style={{height: '250px', width: '600px'}}>
-            <AgGridReact rowData={data} columnDefs={columns} />
+        <div className="ag-theme-alpine employee-List-grid" >
+            <AgGridReact rowData={data} columnDefs={columns}
+                domLayout="autoHeight"
+                defaultColDef={{
+                    flex: 1,
+                    minWidth: 150,
+                    resizable: true,
+
+                }}
+                // onGridReady={onGridReady}
+
+                // sideBar='columnss'
+                hiddenByDefault={false}
+                rowGroupPanelShow='always'
+                pivotPanelShow='always'
+                sideBar={{
+                    toolPanels: [
+                        {
+                            id: 'columns',
+                            labelDefault: 'Columns',
+                            labelKey: 'columns',
+                            iconKey: 'columns',
+                            toolPanel: 'agColumnsToolPanel',
+                            toolPanelParams: {
+                                suppressRowGroups: true,
+                                suppressValues: true,
+                                suppressPivots: false, suppressPivotMode: true,
+                                suppressColumnFilter: true,
+                                suppressColumnSelectAll: true,
+                                suppressColumnExpandAll: true,
+                            }
+                        }
+                    ]
+                }}
+                // sideBar={true}
+                defaultToolPanel='columns'
+                pagination={true}
+                paginationPageSize={8} />
         </div>
-        
+
     )
 }
 
