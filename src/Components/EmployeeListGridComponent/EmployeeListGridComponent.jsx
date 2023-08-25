@@ -34,7 +34,7 @@ const Grid = () => {
 
     return (
         <div className="ag-theme-alpine employee-List-grid" >
-            <AgGridReact rowData={data} columnDefs={getColumnsDefList(columnsList)}
+            <AgGridReact rowData={rowData} columnDefs={getColumnsDefList(columnsList)}
                 domLayout="autoHeight"
                 defaultColDef={{
                     flex: 1,
