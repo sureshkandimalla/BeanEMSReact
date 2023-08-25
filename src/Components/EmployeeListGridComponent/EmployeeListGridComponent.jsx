@@ -27,7 +27,7 @@ const Grid = () => {
             if (fieldValue.toLowerCase() === 'ssn') {
                 fieldValue = fieldValue.toLowerCase();
             }
-            return ({ headerName: column, field: fieldValue, sortable: isSortable, editable: isEditable, filter: hasFilter })
+            return ({ headerName: column, field: fieldValue, sortable: isSortable, editable: isEditable, filter: 'agTextColumnFilter' })
         });
         return columns;
     }
@@ -40,6 +40,8 @@ const Grid = () => {
                     flex: 1,
                     minWidth: 150,
                     resizable: true,
+                    filter: true,
+                    floatingFilter: true
                 }}
                 hiddenByDefault={false}
                 rowGroupPanelShow='always'
@@ -63,6 +65,7 @@ const Grid = () => {
                         }
                     ]
                 }}
+                defaultToolPanel='columns'
                 pagination={true}
                 paginationPageSize={8} />
         </div>
