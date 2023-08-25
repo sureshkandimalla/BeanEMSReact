@@ -1,12 +1,8 @@
 import React from 'react';
-import { Table } from 'antd';
-import employeetableColumns from '../../Component_JSON/EmployeeList';
-import Header from '../../Commons/Header/Header';
 import EmployeeListGridComponent from '../EmployeeListGridComponent/EmployeeListGridComponent';
 import './EmployeeListComponent.scss';
 
 const EmployeeListComponent = () => {
-  // const employeeList = [{firstName: 'F1', lastName: 'L1', email: 'test@gmail.com', actions: 'Test-1'}, {firstName: 'F2', lastName: 'L2', email: 'test@gmail.com', actions: 'Test-2'}];
   const employeeList = [
     {
       firstName: 'First Name - 1',
@@ -104,13 +100,14 @@ const EmployeeListComponent = () => {
   };
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       {/* <Table dataSource={employeeList} bordered columns={employeetableColumns}
         scroll={{ x: 500 }}
         className='employee-table'
         pagination={{ pageSize: 4 }}
         onChange={onChange} /> */}
         <EmployeeListGridComponent />
+        {/* <Footer /> */}
     </div>
   )
 }
