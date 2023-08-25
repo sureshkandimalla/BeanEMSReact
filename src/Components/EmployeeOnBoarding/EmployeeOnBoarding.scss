@@ -1,0 +1,41 @@
+.employee-onboarding-form {
+    padding: 0px;
+    background-color: #F5EEEE;
+    padding: 15px 10px;
+    margin-bottom: 40px;
+
+    .header {
+        margin: 0px;
+        margin-bottom: 10px;
+        color: #005f69;
+    }
+
+    .employee-onboard-card {
+        display: block;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        margin-bottom: 20px;
+
+        .card-header-section {
+            display: grid;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            margin: 0 0 10px 0;
+            color: #005f69;
+        }
+
+        .ant-card-body {
+            padding: 10px;
+        }
+    }
+}
+
+.asterisk {
+    color: red;
+}
+
+.footer-btn-wrapper {
+    padding: 10px 0px;
+}

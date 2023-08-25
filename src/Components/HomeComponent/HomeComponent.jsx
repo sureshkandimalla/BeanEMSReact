@@ -1,17 +1,22 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import { FaCog } from 'react-icons/fa';
+import {useHistory} from "react-router-dom";
 import EmployeeListGridComponent from '../EmployeeListGridComponent/EmployeeListGridComponent';
 import './HomeComponent.scss'
 
 
 const HomeComponent = () => {
     const { TabPane } = Tabs;
+    const history = useHistory();
+
     const toggleTabs = (e) => {
     }
+    
 
     const modifyTableColumns = (e) => {
         console.log("e--", e)
+        history.push('/onboarding')
     }
 
     const items = [
