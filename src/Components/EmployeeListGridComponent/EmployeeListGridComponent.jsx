@@ -10,15 +10,23 @@ import './EmployeeListGridComponent.scss';
 const Grid = () => {
 
     const [rowData, setRowData] = useState();
-    const columnsList = ['First Name', 'Last Name', 'Email', 'Phone', 'Employee ID', 'Date of Birth', 'Current Work Status',
-        'Work Auth Start Date', 'Work Auth End Date', 'Tax Term', 'SSN', 'Gender'];
+    const columnsList = ['First Name', 'Last Name', 'Email Id', 'Phone', 'dob', 'Designation',
+        'Employment Start Date', 'Employment End Date', 'Tax Term', 'SSN', 'Gender'];
     useEffect(() => {
-        // fetch('http://localhost:8080/api/v1/employees')
-        //     .then(response => response.json())
-        //     .then(data => setRowData(data))
-        //     .catch(error => console.error('Error fetching data:', error));
-        setRowData(data);
+        fetch('http://localhost:8080/api/v1/employees')
+            .then(response => response.json())
+            .then(data => {
+                setRowData(getFlattenedData(data));
+            })
+            .catch(error => console.error('Error fetching data:', error));
     }, []);
+
+    const getFlattenedData = (data) => {
+        let updatedData = data.map((dataObj) => {
+            return { ...dataObj, ...dataObj.employeeAddress[0], ...dataObj.employmentDetails[0] }
+        });
+        return updatedData || [];
+    }
 
     const getColumnsDefList = (columnsList, isSortable, isEditable, hasFilter) => {
         let columns = columnsList.map((column) => {
@@ -27,7 +35,8 @@ const Grid = () => {
             if (fieldValue.toLowerCase() === 'ssn') {
                 fieldValue = fieldValue.toLowerCase();
             }
-            return ({ headerName: column, field: fieldValue, sortable: isSortable, editable: isEditable, filter: 'agTextColumnFilter' })
+            let updatedColumn = column === 'dob' ? 'Date of Birth' : column
+            return ({ headerName: updatedColumn, field: fieldValue, sortable: isSortable, editable: isEditable, filter: 'agTextColumnFilter' })
         });
         return columns;
     }

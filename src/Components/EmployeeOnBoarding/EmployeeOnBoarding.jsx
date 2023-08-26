@@ -1,5 +1,6 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Input, Form, Row, Col, Card, Radio, Button } from 'antd';
-import React, { useState, useRef } from 'react';
 import { validateEmail } from '../../utils';
 import './EmployeeOnBoarding.scss'
 
@@ -8,29 +9,47 @@ import './EmployeeOnBoarding.scss'
 const EmployeeOnBoardingForm = () => {
 
     const [form] = Form.useForm();
-
-    const [formObj, setFormObj] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        designation: '',
-        dob: '',
-        gender: '',
-        address_line_1: '',
-        address_line_2: '',
-        city: '',
-        zipCode: ''
-    });
+    const [generalDetails, setGeneralDetails] = useState({ firstName: '', lastName: '', emailId: '', dob: '', gender: '', ssn: '', referredBy:'' });
+    const [employeeAddress, setEmployeeAddress] = useState({ address: '', city: "Frsco", state: '', zipCode: '', country: '' });
+    const [addressNotes, setAddressNotes] = useState([{notesType: '', details:''}]);
+    const [employeeImmigrationDetails, setEmployeeImmigrationDetails] = useState([{
+        visaType :'', visaStartDate:'', visaEndDate:'', immigrationNotes:[{notesType: '', details:'', createdDate:'', endDate:''}], 
+    }]);
+    const [employmentWage, setemploymentWage] = useState([{
+        wage:'', startDate:'', wageNotes: [{notesType: '', details:''}],
+    }])
+    const [employmentDetails, setEmploymentDetails] = useState([
+        {designation:'', lcaNumber:'', employmentStartDate:'', employmentEndDate: ''}
+    ])
+    const [employeeNotes, setEmployeeNotes] = useState([{notesType: '', details:''}]);
+    const [projects, setProjects] = useState([{
+        projectName:'',
+        vendor:'',
+        client:''
+    }]);
+    const [billRate, setBillRate] = useState([
+        {wage: '', startDate:'', wageNotes:'', createdDate:'', endDate:''}
+    ])
+    const [formObj, setFormObj] = useState({});
 
     const handleFormSubmit = () => {
         //api should be called here
+
+        axios.post('http://localhost:8080/api/v1/employees', generalDetails)
+            .then(response => response.json())
+            .then(data => {
+                console.log("newData--", data);
+            })
+            .catch(error => console.error('Error posting data:', error));
     }
 
+
+
     const handleEmailValidation = () => {
-        if (!formObj.email.length) {
+        if (!generalDetails.emailId.length) {
             return Promise.reject(new Error('Email is required'))
         }
-        else if (formObj.email.length && !validateEmail(formObj.email)) {
+        else if (generalDetails.emailId.length && !validateEmail(generalDetails.emailId)) {
             return Promise.reject(new Error('Invalid Email'));
         }
         return Promise.resolve();
@@ -41,6 +60,13 @@ const EmployeeOnBoardingForm = () => {
         let formsObj = { ...formObj };
         formsObj[field] = value;
         setFormObj(formsObj)
+    }
+
+    const handleGeneralData = (e, field) => {
+        const { value } = e.target;
+        let details = {...generalDetails}
+        details[field] = value;
+        setGeneralDetails(details);
     }
 
     return (
@@ -67,12 +93,12 @@ const EmployeeOnBoardingForm = () => {
                     <Row gutter={30}>
                         <Col span={8} className='form-row'>
                             <Form.Item label="First Name" name="First Name" rules={[{ required: true }]}>
-                                <Input onChange={(e) => handleChange(e, 'firstName')} value={formObj.firstName} />
+                                <Input onChange={(e) => handleGeneralData(e, 'firstName')} value={formObj.firstName} />
                             </Form.Item>
                         </Col>
                         <Col span={8} className='form-row'>
                             <Form.Item label="Last Name" name="Last Name" rules={[{ required: true }]}>
-                                <Input onChange={(e) => handleChange(e, 'lastName')} value={formObj.lastName} />
+                                <Input onChange={(e) => handleGeneralData(e, 'lastName')} value={formObj.lastName} />
                             </Form.Item>
                         </Col>
                         <Col span={8} className='form-row'>
@@ -84,17 +110,17 @@ const EmployeeOnBoardingForm = () => {
                     <Row gutter={30}>
                         <Col span={8} className='form-row'>
                             <Form.Item label="Email ID" name="Email ID" rules={[{ required: true, message: '' }, { validator: handleEmailValidation }]}>
-                                <Input onChange={(e) => handleChange(e, 'email')} value={formObj.email} />
+                                <Input onChange={(e) => handleGeneralData(e, 'emailId')} value={generalDetails.emailId} />
                             </Form.Item>
                         </Col>
                         <Col span={8} className='form-row'>
                             <Form.Item label="Date of Birth">
-                                <Input onChange={(e) => handleChange(e, 'dob')} value={formObj.dob} />
+                                <Input onChange={(e) => handleGeneralData(e, 'dob')} value={formObj.dob} />
                             </Form.Item>
                         </Col>
                         <Col span={8} className='form-row'>
                             <Form.Item label="Gender">
-                                <Radio.Group onChange={e => handleChange(e, 'gender')} value={formObj.gender}>
+                                <Radio.Group onChange={e => handleGeneralData(e, 'gender')} value={formObj.gender}>
                                     <Radio value="female">Female</Radio>
                                     <Radio value="male">Male</Radio>
                                     <Radio value="none">I choose not to disclose</Radio>
