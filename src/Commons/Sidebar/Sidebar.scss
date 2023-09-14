@@ -1,0 +1,28 @@
+.siderbar-layout {
+
+    .ant-layout-sider-trigger {
+        bottom: 41px;
+        // background: #282c34;
+        background:  #A9A9A9;
+        // width: 150px !important;
+    }
+
+    :where(.css-dev-only-do-not-override-17a39f8).ant-menu-inline.ant-menu-root,
+    :where(.css-dev-only-do-not-override-17a39f8).ant-menu-vertical.ant-menu-root {
+        // background: #282c34;
+        background: #A9A9A9;
+    }
+}
+
+:where(.css-dev-only-do-not-override-17a39f8).ant-layout .ant-layout-sider {
+    // background: #282c34
+    background: #A9A9A9;
+
+}
+
+.ant-layout-sider {
+    // flex: 0 0 150px !important;
+    // width: 150px !important;
+    // min-width: 150px !important;
+    // max-width: 150px !important;
+}

@@ -5,6 +5,9 @@ import Header from './Commons/Header/Header';
 import Footer from './Commons/Footer/Footer';
 import HomeComponent from './Components/HomeComponent/HomeComponent';
 import EmployeeOnBoardingForm from './Components/EmployeeOnBoarding/EmployeeOnBoarding';
+import EmployeeProjectForm from './Components/EmployeeProjectForm/EmployeeProjectForm';
+import EmployeeAssignmentForm from './Components/EmployeeAssignmentForm/EmployeeAssignmentForm';
+
 
 function App() {
 
@@ -16,8 +19,10 @@ function App() {
         <Header />
         <div className="container">
           <Switch>
-            <Route path="/" exact component={HomeComponent}></Route>
+            <Route path="/employee" exact component={HomeComponent}></Route>
             <Route path="/onboarding" component={EmployeeOnBoardingForm}></Route>
+            <Route path="/project" exact component={EmployeeProjectForm}></Route>
+            <Route path="/assignment" exact component={EmployeeAssignmentForm}></Route>
           </Switch>
         </div>
         <Footer />

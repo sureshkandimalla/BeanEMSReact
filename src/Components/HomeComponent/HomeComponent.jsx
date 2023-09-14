@@ -1,8 +1,9 @@
 import React from 'react';
-import { Tabs } from 'antd';
+import { Tabs, Button } from 'antd';
 import { FaCog } from 'react-icons/fa';
 import {useHistory} from "react-router-dom";
 import EmployeeListGridComponent from '../EmployeeListGridComponent/EmployeeListGridComponent';
+import Sidebar from '../../Commons/Sidebar/Sidebar';
 import './HomeComponent.scss'
 
 
@@ -15,7 +16,6 @@ const HomeComponent = () => {
     
 
     const modifyTableColumns = (e) => {
-        console.log("e--", e)
         history.push('/onboarding')
     }
 
@@ -32,9 +32,11 @@ const HomeComponent = () => {
     ]
 
     return (
-        <div >
+        <Sidebar>
             <Tabs className='bean-home-tabs' defaultActiveKey="1" onChange={toggleTabs} items={items}
-                tabBarExtraContent={<FaCog className='modify-columns-icon' onClick={modifyTableColumns} />}>
+                // tabBarExtraContent={<FaCog className='modify-columns-icon' onClick={modifyTableColumns} />}
+                tabBarExtraContent={<Button type="primary" className='modify-columns-icon' onClick={modifyTableColumns}>Add New Employee</Button>}
+                >
                 {/* <TabPane tab="Tab 1" key="1">
                     <EmployeeListGridComponent />
                 </TabPane>
@@ -42,7 +44,7 @@ const HomeComponent = () => {
                     Content of Tab Pane 2
                 </TabPane> */}
             </Tabs>
-        </div>
+        </Sidebar>
 
     )
 }

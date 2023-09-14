@@ -43,7 +43,7 @@ const Grid = () => {
 
     return (
         <div className="ag-theme-alpine employee-List-grid" >
-            <AgGridReact rowData={rowData} columnDefs={getColumnsDefList(columnsList)}
+            <AgGridReact rowData={rowData} columnDefs={getColumnsDefList(columnsList, true, false)}
                 domLayout="autoHeight"
                 defaultColDef={{
                     flex: 1,
@@ -55,6 +55,7 @@ const Grid = () => {
                 hiddenByDefault={false}
                 rowGroupPanelShow='always'
                 pivotPanelShow='always'
+               
                 sideBar={{
                     toolPanels: [
                         {
@@ -74,6 +75,7 @@ const Grid = () => {
                         }
                     ]
                 }}
+                sortable={true}
                 defaultToolPanel='columns'
                 pagination={true}
                 paginationPageSize={8} />

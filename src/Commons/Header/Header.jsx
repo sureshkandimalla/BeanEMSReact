@@ -10,11 +10,11 @@ const Header = () => {
                     <span><FaUserTie className="mr-2" /></span>
                     <a href='/' className='nav-link'>Employee Management App</a>
                 </div>
-                <div className='right-wrapper'>
+                {/* <div className='right-wrapper'>
                     <a href='/employees' className='nav-link'><span>Employee</span></a>
                     <a href='/projects' className='nav-link'>Project</a>
                     <a href='/assignments' className='nav-link'>Assignment</a>
-                </div>
+                </div> */}
 
             </nav>
         </header>
