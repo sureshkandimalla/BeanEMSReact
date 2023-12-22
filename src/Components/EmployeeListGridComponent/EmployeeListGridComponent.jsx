@@ -23,7 +23,7 @@ const Grid = () => {
 
     const getFlattenedData = (data) => {
         let updatedData = data.map((dataObj) => {
-            return { ...dataObj, ...dataObj.employeeAddress[0], ...dataObj.employmentDetails[0] }
+            return { ...dataObj, ...dataObj.employeeAddress[0], ...dataObj.employeeAssignments[0] }
         });
         return updatedData || [];
     }
