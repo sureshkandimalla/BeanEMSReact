@@ -5,13 +5,16 @@ import 'ag-grid-enterprise';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './EmployeeListGridComponent.scss';
+import CustomElements from './CustomElement.jsx';
+
 
 
 const Grid = () => {
 
     const [rowData, setRowData] = useState();
-    const columnsList = ['First Name', 'Last Name', 'Email Id', 'Phone', 'dob', 'Designation',
-        'Employment Start Date', 'Employment End Date', 'Tax Term', 'SSN', 'Gender'];
+    const columnsList = ['First Name', 'Last Name', 'Email Id', 'Phone', 'DOB','Employee Id', 'Designation','startDate','endDate'
+        ,'Employment Type', 'SSN', 'Gender'];
+        //'FIRST NAME','LAST NAME','EMAIL ID','PHONE','EMPLOYEE ID','DOB','GENDER','SSN','DESIGNATION','EMPLOYMENT WORK TYPE','BENEFITS STATUS','TAX TERMS','EMPLOYMENT START DATE','CURRENT WORK STATUS','WORK AUTH START DATE','WORK AUTH END DATE','I94END DATE','HOME ADDRESS','ZIP CODE(HOME ADDRESS)','CURRENT PROJECT TITLE','PROJECT START DATE','PROJECT END DATE','CURRENT WORK LOCATION','ZIP CODE(WORK LOCATION)','WAGE RATE (OFFERED SALARY)','DEPARTMENT','REPORTING TO','REPORTING EMPLOYEES/TRAINEES','BILLING STATUS','LAST MODIFIED BY','LAST MODIFIED DATE',
     useEffect(() => {
         fetch('http://localhost:8080/api/v1/employees')
             .then(response => response.json())
@@ -32,14 +35,23 @@ const Grid = () => {
         let columns = columnsList.map((column) => {
             let fieldValue = column.split(' ').join('')
             fieldValue = fieldValue[0].toLowerCase() + fieldValue.slice(1);
-            if (fieldValue.toLowerCase() === 'ssn') {
+            if (fieldValue.toLowerCase() === 'ssn' || fieldValue.toLowerCase() === 'dob') {
                 fieldValue = fieldValue.toLowerCase();
             }
-            let updatedColumn = column === 'dob' ? 'Date of Birth' : column
-            return ({ headerName: updatedColumn, field: fieldValue, sortable: isSortable, editable: isEditable, filter: 'agTextColumnFilter' })
+
+            let updatedColumn = column === 'DOB' ? 'Date of Birth' : column
+            updatedColumn = column
+            if(column == 'startDate' )
+                updatedColumn='Employment Start Date'
+            else if(column == 'endDate')
+                updatedColumn='Employment End Date'
+            return ({ headerName: updatedColumn,
+                        field:  fieldValue, sortable: isSortable, editable: true, filter: 'agTextColumnFilter' })
         });
         return columns;
     }
+
+
 
     return (
         <div className="ag-theme-alpine employee-List-grid" >
