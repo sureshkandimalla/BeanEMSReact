@@ -14,6 +14,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import HomeComponent from '../../Components/HomeComponent/HomeComponent';
 import EmployeeAssignmentForm from '../../Components/EmployeeAssignmentForm/EmployeeAssignmentForm';
 import EmployeeProjectForm from '../../Components/EmployeeProjectForm/EmployeeProjectForm';
+import EmployeeDetailsComponent from '../../Components/EmployeeDetailsComponent/EmployeeDetailsComponent';
 import './Sidebar.scss'
 // import './HomeComponent.scss'
 
@@ -38,14 +39,18 @@ const Sidebar = ({ children }) => {
                 console.log("page - 1")
                 // history.push('/employee')
                 return <HomeComponent />
-            case 2:
-                console.log("page - 2")
-                window.loca.push('/project')
-                return <EmployeeProjectForm />
             case 3:
                 console.log("page - 3")
+                window.loca.push('/project')
+                return <EmployeeProjectForm />
+            case 4:
+                console.log("page - 4")
                 history.push('/assignment')
                 return <EmployeeAssignmentForm />
+            case 2:
+                console.log("page - 2")
+                history.push('/employeeDetails')
+                return <EmployeeDetailsComponent />
 
             default:
                 history.push('/employee');
@@ -73,6 +78,13 @@ const Sidebar = ({ children }) => {
                                 label: 'Employee',
                                 // label: <Link to='/employee'>Employee</Link>
                                 onClick: () => history.push('/employee')
+                            },
+                            {
+                                key: '/employeeDetails',
+                                icon: <UserOutlined />,
+                                label: 'employeeDetails',
+                                // label: <Link to='/employee'>Employee</Link>
+                                onClick: () => history.push('/employeeDetails')
                             },
                             {
                                 key: '/project',

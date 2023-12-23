@@ -5,85 +5,107 @@ import 'ag-grid-enterprise';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './EmployeeProjectForm.scss';
+import Sidebar from "../../Commons/Sidebar/Sidebar";
+import EmployeeListGridComponent from '../EmployeeListGridComponent/EmployeeListGridComponent';
+
+const Grid = () => {
+
+    const [rowData, setRowData] = useState();
 
 
-const EmployeeProjectForm = () => {
+    useEffect(() => {
+        fetch('http://localhost:8080/api/v1/projects')
+            .then(response => response.json())
+            .then(data => {
+                setRowData(getFlattenedData(data));
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
 
-     const [rowData, setRowData] = useState();
-     const columnsList = ['Project Id', 'Project Name', 'Vendor', 'Client',
-         'Start Date', 'End Date', 'Invoice Term', 'Payment Term', 'Status', 'Assignment', 'Last Updated'];
-     useEffect(() => {
-         fetch('http://localhost:8080/api/v1/projects')
-             .then(response => response.json())
-             .then(data => {
-                 setRowData(getFlattenedData(data));
-             })
-             .catch(error => console.error('Error fetching data:', error));
-     }, []);
+    const getFlattenedData = (data) => {
 
-     const getFlattenedData = (data) => {
-        console.log(data)
-         let updatedData = data.map((dataObj) => {
-            console.log(dataObj)
-             return { ...dataObj, ...dataObj.assignments[0]}
-         });
-         console.log(updatedData)
-         return updatedData || [];
-     }
+        let updatedData = data.map((dataObj) => {
+        return { ...dataObj,vendor: dataObj.customer.customerCompanyName,employeeName: dataObj.employee.firstName +' '+dataObj.employee.lastName ,wage: 30}
 
-     const getColumnsDefList = (columnsList, isSortable, isEditable) => {
-         let columns = columnsList.map((column) => {
-             let fieldValue = column.split(' ').join('')
-             fieldValue = fieldValue[0].toLowerCase() + fieldValue.slice(1);
-             if (fieldValue.toLowerCase() === 'ssn') {
-                 fieldValue = fieldValue.toLowerCase();
-             }
-             let updatedColumn = column === 'dob' ? 'Date of Birth' : column
-             return ({ headerName: updatedColumn, field: fieldValue, sortable: isSortable, editable: isEditable, filter: 'agTextColumnFilter' })
-         });
-         return columns;
-     }
+           // return { ...dataObj,...dataObj.assignments[0],...dataObj.employee.firstName.value, ...dataObj.employee.employeeAssignments[0],...dataObj.customer,...dataObj.billRates[0] }
+        });
+        console.log(updatedData)
+        return updatedData || [];
+    }
 
-     return (
-         <div className="ag-theme-alpine employee-List-grid" >
-             <AgGridReact rowData={rowData} columnDefs={getColumnsDefList(columnsList, true, false)}
-                 domLayout="autoHeight"
-                 defaultColDef={{
-                     flex: 1,
-                     minWidth: 150,
-                     resizable: true,
-                     filter: true,
-                     floatingFilter: true
-                 }}
-                 hiddenByDefault={false}
-                 rowGroupPanelShow='always'
-                 pivotPanelShow='always'
+    const getColumnsDefList = ( isSortable, isEditable, hasFilter) => {
+   /// const columnsList = ['Project Name', 'Project Id ','Employee Id', 'Employee Name', 'Client', 'Vendor','Bill Rate', 'Invoice Terms','startDate','endDate','Status','Employee Pay','Expenses','Bean Expenses','Bean Net','Total Hours';
+       var columns = [
+                        { headerName: 'Project Name', field: 'projectName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                       // { headerName: 'Project Id', field: 'projectId', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                      //  { headerName: 'Employee Id', field: 'employeeId', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                      { headerName: 'Employee Name', field: 'employeeName', cellRenderer: (params) => {
+                                                                                                            //const hrefValue = `https://example.com/${params.data.id}`;
+                                                                                                            const hrefValue = `/employee`;
+                                                                                                            return <a href={hrefValue} target="_self" >{params.value}</a>;
+                                                                                                          },
+                             sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
+                        //{ headerName: 'Employee Name', field: 'employeeName', valueGetter(params) { return  params.data.firstName + ' ' + params.data.lastName ;},sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
+                        { headerName: 'Client', field: 'client',sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Vendor', field: 'vendor', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Bill Rate', field: 'wage', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Invoice Terms', field: 'invoiceTerm', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Project Start Date', field: 'startDate', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Project End Date', field: 'endDate', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Status', field: 'status', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Employee Pay', field: 'projectName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Expenses', field: 'client', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Bean Expenses', field: 'customerCompanyName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Bean Net', field: 'customerCompanyName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Total Hours', field: 'projectId', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' }
+                       ]
+        return columns;
+    }
 
-                 sideBar={{
-                     toolPanels: [
-                         {
-                             id: 'columns',
-                             labelDefault: 'Columns',
-                             labelKey: 'columns',
-                             iconKey: 'columns',
-                             toolPanel: 'agColumnsToolPanel',
-                             toolPanelParams: {
-                                 suppressRowGroups: true,
-                                 suppressValues: true,
-                                 suppressPivots: false, suppressPivotMode: true,
-                                 suppressColumnFilter: true,
-                                 suppressColumnSelectAll: true,
-                                 suppressColumnExpandAll: true,
-                             }
-                         }
-                     ]
-                 }}
-                 sortable={true}
-                 defaultToolPanel='columns'
-                 pagination={true}
-                 paginationPageSize={8} />
-         </div>
-     )
- }
 
- export default EmployeeProjectForm;
+
+    return (
+     <Sidebar>
+        <div className="ag-theme-alpine employee-List-grid" >
+            <AgGridReact rowData={rowData} columnDefs={getColumnsDefList( true, false)}
+                domLayout="autoHeight"
+                defaultColDef={{
+                    flex: 1,
+                    minWidth: 150,
+                    resizable: true,
+                    filter: true,
+                    floatingFilter: true
+                }}
+                hiddenByDefault={false}
+                rowGroupPanelShow='always'
+                pivotPanelShow='always'
+
+                sideBar={{
+                    toolPanels: [
+                        {
+                            id: 'columns',
+                            labelDefault: 'Columns',
+                            labelKey: 'columns',
+                            iconKey: 'columns',
+                            toolPanel: 'agColumnsToolPanel',
+                            toolPanelParams: {
+                                suppressRowGroups: true,
+                                suppressValues: true,
+                                suppressPivots: false, suppressPivotMode: true,
+                                suppressColumnFilter: true,
+                                suppressColumnSelectAll: true,
+                                suppressColumnExpandAll: true,
+                            }
+                        }
+                    ]
+                }}
+                sortable={true}
+                defaultToolPanel='columns'
+                pagination={true}
+                paginationPageSize={8} />
+        </div>
+         </Sidebar>
+    )
+}
+
+export default Grid;
