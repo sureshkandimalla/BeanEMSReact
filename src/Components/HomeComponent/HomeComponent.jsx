@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import EmployeeListGridComponent from '../EmployeeListGridComponent/EmployeeListGridComponent';
 import Sidebar from '../../Commons/Sidebar/Sidebar';
 import './HomeComponent.scss'
+import ActiveInvoicesComponent from "../ActiveInvoicesComponent/ActiveInvoicesComponent";
 
 
 const HomeComponent = () => {
@@ -22,11 +23,12 @@ const HomeComponent = () => {
         {
             key: 1,
             label: 'Employee List',
-            children: <EmployeeListGridComponent />
+            children: <EmployeeListGridComponent/>
         },
         {
             key: 2,
-            label: 'Invoices'
+            label: 'Invoices',
+            children: <ActiveInvoicesComponent/>
         },
     ]
 
