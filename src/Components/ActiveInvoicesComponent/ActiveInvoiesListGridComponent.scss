@@ -1,0 +1,15 @@
+.employee-List-grid {
+    width: 100%;
+    font-family: -webkit-body;
+    // padding: 20px;
+  }
+
+  .ag-theme-alpine .ag-layout-auto-height .ag-center-cols-clipper, 
+  .ag-theme-alpine .ag-layout-auto-height .ag-center-cols-container,
+    .ag-theme-alpine .ag-layout-print .ag-center-cols-clipper, .ag-theme-alpine 
+    .ag-layout-print .ag-center-cols-container, .ag-theme-alpine-dark .ag-layout-auto-height
+    .ag-center-cols-clipper, .ag-theme-alpine-dark .ag-layout-auto-height .ag-center-cols-container, 
+    .ag-theme-alpine-dark .ag-layout-print .ag-center-cols-clipper, .ag-theme-alpine-dark 
+    .ag-layout-print .ag-center-cols-container {
+    min-height: auto;
+  }
