@@ -15,14 +15,12 @@
   }
   .two-parts-container {
     display: flex;
-    height: 90vh;
-    background: '#0092ff';/* Adjust this value based on your layout requirements */
-        background-color: #0092ff;
+    height: 90vh; /* Adjust this value based on your layout requirements */
   }
 
   .part {
     flex: 1;
-     height: 80vh;
+     height: 100%;
     padding: 30px;
     box-sizing: border-box;
     border: 3px solid #ccc; /* Border around each part */
@@ -63,39 +61,3 @@
       }
     }
     */
-
-    .gutter-box {
-      padding: 8px 0;
-            paddingLeft: 8px 0;
-      background: #00a0e9;
-      height: '400px'
-    }
-    .name-span {
-
-         wordWrap: 'break-word';
-      font-family: Times; /* Set your desired font family */
-      color: blue; /* Set your desired text color */
-    }
-    .designation-style {
-              font-size: 12px;  // Set a different font size for the second line
-                vertical-align: top;
-                horizontal-align: center;
-                margin-left: 3em;
-              fontWeight: 'bold';
-               wordWrap: 'break-word';
-
-          font-family: Times, sans-serif; /* Set your desired font family */
-          color: black; /* Set your desired text color */
-        }
-
-        /* Responsive styles based on viewport width */
-        @media (max-width: 600px) {
-          .responsive-card {
-            width: 80%; /* Set a relative width for small screens */
-          }
-        }
-
-        /* Default styles for larger screens */
-        .responsive-card {
-          width: 300px; /* Set a default width for larger screens */
-        }

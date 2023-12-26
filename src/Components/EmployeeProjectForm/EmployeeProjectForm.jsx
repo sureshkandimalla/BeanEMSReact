@@ -7,6 +7,7 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './EmployeeProjectForm.scss';
 import Sidebar from "../../Commons/Sidebar/Sidebar";
 import EmployeeListGridComponent from '../EmployeeListGridComponent/EmployeeListGridComponent';
+import EmployeeProjectDetails from './EmployeeProjectDetails'
 
 const Grid = () => {
 
@@ -14,7 +15,7 @@ const Grid = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/v1/projects')
+        fetch('http://localhost:8080/api/v1/getProjects')
             .then(response => response.json())
             .then(data => {
                 setRowData(getFlattenedData(data));
@@ -25,7 +26,7 @@ const Grid = () => {
     const getFlattenedData = (data) => {
 
         let updatedData = data.map((dataObj) => {
-        return { ...dataObj,vendor: dataObj.customer.customerCompanyName,employeeName: dataObj.employee.firstName +' '+dataObj.employee.lastName ,wage: 30}
+        return { ...dataObj}
 
            // return { ...dataObj,...dataObj.assignments[0],...dataObj.employee.firstName.value, ...dataObj.employee.employeeAssignments[0],...dataObj.customer,...dataObj.billRates[0] }
         });
@@ -41,23 +42,24 @@ const Grid = () => {
                       //  { headerName: 'Employee Id', field: 'employeeId', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
                       { headerName: 'Employee Name', field: 'employeeName', cellRenderer: (params) => {
                                                                                                             //const hrefValue = `https://example.com/${params.data.id}`;
-                                                                                                            const hrefValue = `/employee`;
+                                                                                                            const hrefValue = `/projectDetails`;
                                                                                                             return <a href={hrefValue} target="_self" >{params.value}</a>;
                                                                                                           },
                              sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
                         //{ headerName: 'Employee Name', field: 'employeeName', valueGetter(params) { return  params.data.firstName + ' ' + params.data.lastName ;},sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
-                        { headerName: 'Client', field: 'client',sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
-                        { headerName: 'Vendor', field: 'vendor', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
-                        { headerName: 'Bill Rate', field: 'wage', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
-                        { headerName: 'Invoice Terms', field: 'invoiceTerm', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Client', field: 'clientName',sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Vendor', field: 'vendorName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Bill Rate', field: 'billRate', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
                         { headerName: 'Project Start Date', field: 'startDate', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
                         { headerName: 'Project End Date', field: 'endDate', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
                         { headerName: 'Status', field: 'status', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
-                        { headerName: 'Employee Pay', field: 'projectName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
-                        { headerName: 'Expenses', field: 'client', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
-                        { headerName: 'Bean Expenses', field: 'customerCompanyName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
-                        { headerName: 'Bean Net', field: 'customerCompanyName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
-                        { headerName: 'Total Hours', field: 'projectId', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' }
+                        { headerName: 'Invoice Terms', field: 'invoiceTerm', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        { headerName: 'Invoice Terms', field: 'invoiceTerm', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        //{ headerName: 'Employee Pay', field: 'projectName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        //{ headerName: 'Expenses', field: 'client', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                        //{ headerName: 'Bean Expenses', field: 'customerCompanyName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                       // { headerName: 'Bean Net', field: 'customerCompanyName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                       // { headerName: 'Total Hours', field: 'projectId', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' }
                        ]
         return columns;
     }

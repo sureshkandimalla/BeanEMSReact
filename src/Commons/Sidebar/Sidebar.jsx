@@ -112,7 +112,7 @@ const Sidebar = ({ children }) => {
                         style={{
                             // margin: '24px 16px',
                             // padding: 24,
-                            minHeight:'78vh',
+                            minHeight:'91vh',
                             background: '#fff',
                             // width:'150px'
                         }}

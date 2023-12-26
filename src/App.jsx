@@ -8,6 +8,8 @@ import EmployeeOnBoardingForm from './Components/EmployeeOnBoarding/EmployeeOnBo
 import EmployeeProjectForm from './Components/EmployeeProjectForm/EmployeeProjectForm';
 import EmployeeAssignmentForm from './Components/EmployeeAssignmentForm/EmployeeAssignmentForm';
 import EmployeeDetailsComponent from './Components/EmployeeDetailsComponent/EmployeeDetailsComponent';
+import EmployeeProjectDetails from './Components/EmployeeProjectForm/EmployeeProjectDetails';
+
 
 
 function App() {
@@ -24,7 +26,8 @@ function App() {
             <Route path="/onboarding" component={EmployeeOnBoardingForm}></Route>
             <Route path="/project" exact component={EmployeeProjectForm}></Route>
             <Route path="/assignment" exact component={EmployeeAssignmentForm}></Route>
-             <Route path="/employeeDetails" exact component={EmployeeDetailsComponent}></Route>
+            <Route path="/employeeDetails" exact component={EmployeeDetailsComponent}></Route>
+            <Route path="/projectDetails" exact component={EmployeeProjectDetails}></Route>
           </Switch>
         </div>
         <Footer />
