@@ -5,7 +5,8 @@ import {
     UploadOutlined,
     UserOutlined,
     VideoCameraOutlined,
-    RightCircleOutlined
+    RightCircleOutlined,
+    FileImageFilled
 } from '@ant-design/icons';
 
 import { Layout, Menu, Button, theme } from 'antd';
@@ -13,6 +14,7 @@ import { useHistory } from 'react-router';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import HomeComponent from '../../Components/HomeComponent/HomeComponent';
 import EmployeeAssignmentForm from '../../Components/EmployeeAssignmentForm/EmployeeAssignmentForm';
+import EmployeeInvoicesForm from '../../Components/EmployeeInvoicesForm/EmployeeInvoicesForm';
 import EmployeeProjectForm from '../../Components/EmployeeProjectForm/EmployeeProjectForm';
 import EmployeeDetailsComponent from '../../Components/EmployeeDetailsComponent/EmployeeDetailsComponent';
 import './Sidebar.scss'
@@ -47,6 +49,10 @@ const Sidebar = ({ children }) => {
                 console.log("page - 4")
                 history.push('/assignment')
                 return <EmployeeAssignmentForm />
+            case 5:
+                console.log("page - 5")
+                history.push('/invoices')
+                return <EmployeeInvoicesForm />
             case 2:
                 console.log("page - 2")
                 history.push('/employeeDetails')
@@ -76,13 +82,15 @@ const Sidebar = ({ children }) => {
                                 key: '/employee',
                                 icon: <UserOutlined />,
                                 label: 'Employee',
+                                title: 'Employee',
                                 // label: <Link to='/employee'>Employee</Link>
                                 onClick: () => history.push('/employee')
                             },
                             {
                                 key: '/employeeDetails',
                                 icon: <UserOutlined />,
-                                label: 'employeeDetails',
+                                label: 'EmployeeDetails',
+                                title: 'EmployeeDetails',
                                 // label: <Link to='/employee'>Employee</Link>
                                 onClick: () => history.push('/employeeDetails')
                             },
@@ -90,6 +98,7 @@ const Sidebar = ({ children }) => {
                                 key: '/project',
                                 icon: <VideoCameraOutlined />,
                                 label: 'Project',
+                                title: 'Project',
                                 onClick: () => history.push('/project')
                                 // onClick: () => setNavKey(2),
                                 // label: <Link to='/project'>Project</Link>
@@ -98,11 +107,21 @@ const Sidebar = ({ children }) => {
                                 key: '/assignment',
                                 icon: <UploadOutlined />,
                                 label: 'Assignment',
+                                title: 'Assignment',
                                 // label: <Link to='/assignment'>Assignment</Link>,
                                 // onClick: () => setNavKey(3),
                                 // render: () => <></>
                                 // onClick: () => handleTabClick('/assignment')
                                 onClick: () => history.push('/assignment')
+                            },
+                            {
+                                key: '/invoices',
+                                icon: <FileImageFilled />,
+                                label: 'Invoices',
+                                title: 'Invoices',
+                                onClick: () => history.push('/invoices') //todo
+                                // onClick: () => setNavKey(2),
+                                // label: <Link to='/project'>Project</Link>
                             }
                         ]}
                     />

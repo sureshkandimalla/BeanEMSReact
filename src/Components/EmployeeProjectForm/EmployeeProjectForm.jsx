@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-enterprise';
 import 'ag-grid-enterprise';
@@ -42,8 +43,19 @@ const Grid = () => {
                       //  { headerName: 'Employee Id', field: 'employeeId', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
                       { headerName: 'Employee Name', field: 'employeeName', cellRenderer: (params) => {
                                                                                                             //const hrefValue = `https://example.com/${params.data.id}`;
-                                                                                                            const hrefValue = `/projectDetails`;
-                                                                                                            return <a href={hrefValue} target="_self" >{params.value}</a>;
+                                                                                                            //const hrefValue = `/projectDetails`;
+                                                                                                            ///return <a href={hrefValue} target="_self" >{params.value}</a>;
+                                                                                                            const rowData = params.data;
+                                                                                                            return (
+                                                                                                            <Link
+                                                                                                                to={{  
+                                                                                                                pathname: '/projectDetails',
+                                                                                                                state: { rowData },
+                                                                                                                }}
+                                                                                                            >
+                                                                                                                {rowData.employeeName}
+                                                                                                            </Link>
+                                                                                                            );
                                                                                                           },
                              sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
                         //{ headerName: 'Employee Name', field: 'employeeName', valueGetter(params) { return  params.data.firstName + ' ' + params.data.lastName ;},sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
