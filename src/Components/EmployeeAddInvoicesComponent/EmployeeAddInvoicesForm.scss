@@ -13,3 +13,34 @@
     .ag-layout-print .ag-center-cols-container {
     min-height: auto;
   }
+
+  .modify-columns-icon{
+    cursor: pointer;
+}
+
+.ag-cell-editable .ag-cell-edit-input {
+  width: 100%;
+  padding: 4px 8px;
+  box-sizing: border-box;
+}
+
+.ag-cell-inline-editing {
+  background-color: rgb(203, 230, 173); /* Change the color to your preference */
+}
+
+.editable-input {
+  border: 1px solid #0f0e0e;
+  padding: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.blinking {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

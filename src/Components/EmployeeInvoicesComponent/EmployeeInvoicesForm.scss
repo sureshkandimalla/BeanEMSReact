@@ -1,0 +1,40 @@
+.employee-List-grid {
+    width: 100%;
+    font-family: -webkit-body;
+    // padding: 20px;
+  }
+
+  .ag-theme-alpine .ag-layout-auto-height .ag-center-cols-clipper, 
+  .ag-theme-alpine .ag-layout-auto-height .ag-center-cols-container,
+    .ag-theme-alpine .ag-layout-print .ag-center-cols-clipper, .ag-theme-alpine 
+    .ag-layout-print .ag-center-cols-container, .ag-theme-alpine-dark .ag-layout-auto-height
+    .ag-center-cols-clipper, .ag-theme-alpine-dark .ag-layout-auto-height .ag-center-cols-container, 
+    .ag-theme-alpine-dark .ag-layout-print .ag-center-cols-clipper, .ag-theme-alpine-dark 
+    .ag-layout-print .ag-center-cols-container {
+    min-height: auto;
+  }
+
+  .modify-columns-icon{
+    cursor: pointer;
+}
+
+container {
+  display: flex;
+}
+.left-panel {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 8px;
+  flex: 1;
+}
+
+.button {
+  padding: 8px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 20px;
+}

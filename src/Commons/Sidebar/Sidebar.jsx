@@ -14,7 +14,7 @@ import { useHistory } from 'react-router';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import HomeComponent from '../../Components/HomeComponent/HomeComponent';
 import EmployeeAssignmentForm from '../../Components/EmployeeAssignmentForm/EmployeeAssignmentForm';
-import EmployeeInvoicesForm from '../../Components/EmployeeInvoicesForm/EmployeeInvoicesForm';
+import EmployeeInvoicesForm from '../../Components/EmployeeInvoicesComponent/EmployeeInvoicesForm';
 import EmployeeProjectForm from '../../Components/EmployeeProjectForm/EmployeeProjectForm';
 import EmployeeDetailsComponent from '../../Components/EmployeeDetailsComponent/EmployeeDetailsComponent';
 import './Sidebar.scss'

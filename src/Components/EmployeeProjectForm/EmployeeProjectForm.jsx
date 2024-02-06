@@ -7,8 +7,6 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './EmployeeProjectForm.scss';
 import Sidebar from "../../Commons/Sidebar/Sidebar";
-import EmployeeListGridComponent from '../EmployeeListGridComponent/EmployeeListGridComponent';
-import EmployeeProjectDetails from './EmployeeProjectDetails'
 
 const Grid = () => {
 
