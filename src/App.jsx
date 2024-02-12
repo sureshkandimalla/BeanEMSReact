@@ -11,6 +11,7 @@ import EmployeeInvoicesForm from './Components/EmployeeInvoicesComponent/Employe
 import EmployeeAddInvoicesForm from './Components/EmployeeAddInvoicesComponent/EmployeeAddInvoicesForm';
 import EmployeeDetailsComponent from './Components/EmployeeDetailsComponent/EmployeeDetailsComponent';
 import EmployeeProjectDetails from './Components/EmployeeProjectForm/EmployeeProjectDetails';
+import ProjectDetails from './Components/EmployeeProjectForm/ProjectDetails';
 
 
 
@@ -31,7 +32,8 @@ function App() {
             <Route path="/invoices" exact component={EmployeeInvoicesForm}></Route>
             <Route path="/addInvoices" exact component={EmployeeAddInvoicesForm}></Route>
             <Route path="/employeeDetails" exact component={EmployeeDetailsComponent}></Route>
-            <Route path="/projectDetails" exact component={EmployeeProjectDetails}></Route>
+            <Route path="/employeeProjectDetails" exact component={EmployeeProjectDetails}></Route>
+            <Route path="/projectDetails" exact component={ProjectDetails}></Route>
           </Switch>
         </div>
         <Footer />

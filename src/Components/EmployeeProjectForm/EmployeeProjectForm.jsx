@@ -36,8 +36,24 @@ const Grid = () => {
     const getColumnsDefList = ( isSortable, isEditable, hasFilter) => {
    /// const columnsList = ['Project Name', 'Project Id ','Employee Id', 'Employee Name', 'Client', 'Vendor','Bill Rate', 'Invoice Terms','startDate','endDate','Status','Employee Pay','Expenses','Bean Expenses','Bean Net','Total Hours';
        var columns = [
-                        { headerName: 'Project Name', field: 'projectName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
-                       // { headerName: 'Project Id', field: 'projectId', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                       { headerName: 'Project Name', field: 'projectName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
+                       { headerName: 'Project Id', field: 'projectId', cellRenderer: (params) => {
+                                                                                                                                                                                 //const hrefValue = `https://example.com/${params.data.id}`;
+                                                                                                                                                                                 //const hrefValue = `/projectDetails`;
+                                                                                                                                                                                 ///return <a href={hrefValue} target="_self" >{params.value}</a>;
+                                                                                                                                                                                 const rowData = params.data;
+                                                                                                                                                                                 return (
+                                                                                                                                                                                 <Link
+                                                                                                                                                                                     to={{
+                                                                                                                                                                                     pathname: '/projectDetails',
+                                                                                                                                                                                     state: { rowData },
+                                                                                                                                                                                     }}
+                                                                                                                                                                                 >
+                                                                                                                                                                                     {rowData.projectId}
+                                                                                                                                                                                 </Link>
+                                                                                                                                                                                 );
+                                                                                                                                                                               },
+                                                                                                  sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
                       //  { headerName: 'Employee Id', field: 'employeeId', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
                       { headerName: 'Employee Name', field: 'employeeName', cellRenderer: (params) => {
                                                                                                             //const hrefValue = `https://example.com/${params.data.id}`;
@@ -47,7 +63,7 @@ const Grid = () => {
                                                                                                             return (
                                                                                                             <Link
                                                                                                                 to={{  
-                                                                                                                pathname: '/projectDetails',
+                                                                                                                pathname: '/employeeProjectDetails',
                                                                                                                 state: { rowData },
                                                                                                                 }}
                                                                                                             >
@@ -114,7 +130,7 @@ const Grid = () => {
                 sortable={true}
                 defaultToolPanel='columns'
                 pagination={true}
-                paginationPageSize={8} />
+                paginationPageSize={15} />
         </div>
          </Sidebar>
     )
