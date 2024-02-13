@@ -7,6 +7,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './EmployeeProjectForm.scss';
 import Sidebar from "../../Commons/Sidebar/Sidebar";
+import ProjectDashboard from '../EmployeeProjectForm/ProjectDashboard';
 
 const Grid = () => {
 
@@ -37,41 +38,11 @@ const Grid = () => {
    /// const columnsList = ['Project Name', 'Project Id ','Employee Id', 'Employee Name', 'Client', 'Vendor','Bill Rate', 'Invoice Terms','startDate','endDate','Status','Employee Pay','Expenses','Bean Expenses','Bean Net','Total Hours';
        var columns = [
                        { headerName: 'Project Name', field: 'projectName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
-                       { headerName: 'Project Id', field: 'projectId', cellRenderer: (params) => {
-                                                                                                                                                                                 //const hrefValue = `https://example.com/${params.data.id}`;
-                                                                                                                                                                                 //const hrefValue = `/projectDetails`;
-                                                                                                                                                                                 ///return <a href={hrefValue} target="_self" >{params.value}</a>;
-                                                                                                                                                                                 const rowData = params.data;
-                                                                                                                                                                                 return (
-                                                                                                                                                                                 <Link
-                                                                                                                                                                                     to={{
-                                                                                                                                                                                     pathname: '/projectDetails',
-                                                                                                                                                                                     state: { rowData },
-                                                                                                                                                                                     }}
-                                                                                                                                                                                 >
-                                                                                                                                                                                     {rowData.projectId}
-                                                                                                                                                                                 </Link>
-                                                                                                                                                                                 );
-                                                                                                                                                                               },
-                                                                                                  sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
+                       { headerName: 'Project Id', field: 'projectId', cellRenderer: (params) => {const rowData = params.data;
+                              return ( <Link to={{ pathname: '/projectDetails',state: { rowData }, }} > {rowData.projectId}</Link>); }, sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
                       //  { headerName: 'Employee Id', field: 'employeeId', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
-                      { headerName: 'Employee Name', field: 'employeeName', cellRenderer: (params) => {
-                                                                                                            //const hrefValue = `https://example.com/${params.data.id}`;
-                                                                                                            //const hrefValue = `/projectDetails`;
-                                                                                                            ///return <a href={hrefValue} target="_self" >{params.value}</a>;
-                                                                                                            const rowData = params.data;
-                                                                                                            return (
-                                                                                                            <Link
-                                                                                                                to={{  
-                                                                                                                pathname: '/employeeProjectDetails',
-                                                                                                                state: { rowData },
-                                                                                                                }}
-                                                                                                            >
-                                                                                                                {rowData.employeeName}
-                                                                                                            </Link>
-                                                                                                            );
-                                                                                                          },
-                             sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
+                      { headerName: 'Employee Name', field: 'employeeName', cellRenderer: (params) => { const rowData = params.data;
+                            return (<Link to={{  pathname: '/employeeProjectDetails', state: { rowData }, }} > {rowData.employeeName} </Link> );}, sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
                         //{ headerName: 'Employee Name', field: 'employeeName', valueGetter(params) { return  params.data.firstName + ' ' + params.data.lastName ;},sortable: isSortable, editable: false, filter: 'agTextColumnFilter' },
                         { headerName: 'Client', field: 'clientName',sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
                         { headerName: 'Vendor', field: 'vendorName', sortable: isSortable, editable: true, filter: 'agTextColumnFilter' },
@@ -94,7 +65,9 @@ const Grid = () => {
 
     return (
      <Sidebar>
+        <ProjectDashboard />
         <div className="ag-theme-alpine employee-List-grid" >
+
             <AgGridReact rowData={rowData} columnDefs={getColumnsDefList( true, false)}
                 domLayout="autoHeight"
                 defaultColDef={{
@@ -117,7 +90,7 @@ const Grid = () => {
                             iconKey: 'columns',
                             toolPanel: 'agColumnsToolPanel',
                             toolPanelParams: {
-                                suppressRowGroups: true,
+                                suppressRowGroups: false,
                                 suppressValues: true,
                                 suppressPivots: false, suppressPivotMode: true,
                                 suppressColumnFilter: true,
@@ -132,6 +105,7 @@ const Grid = () => {
                 pagination={true}
                 paginationPageSize={15} />
         </div>
+
          </Sidebar>
     )
 }

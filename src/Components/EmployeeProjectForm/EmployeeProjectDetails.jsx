@@ -124,7 +124,7 @@ const TwoPartPage = () => {
                 </Col>
 
                 {/* Second Part */}
-                <Col span={18} >
+                <Col span={10} >
                   <div className="part"  style={divStyle}>
                   <Tabs className='bean-home-tabs' defaultActiveKey="1" onChange={toggleTabs} items={items}>
                  </Tabs>
