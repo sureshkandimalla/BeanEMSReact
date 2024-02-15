@@ -17,6 +17,7 @@ import EmployeeAssignmentForm from '../../Components/EmployeeAssignmentForm/Empl
 import EmployeeInvoicesForm from '../../Components/EmployeeInvoicesComponent/EmployeeInvoicesForm';
 import EmployeeProjectForm from '../../Components/EmployeeProjectForm/EmployeeProjectForm';
 import EmployeeDetailsComponent from '../../Components/EmployeeDetailsComponent/EmployeeDetailsComponent';
+import BillsForm from '../../Components/BillsComponent/BillsForm';
 import './Sidebar.scss'
 // import './HomeComponent.scss'
 
@@ -57,7 +58,10 @@ const Sidebar = ({ children }) => {
                 console.log("page - 2")
                 history.push('/employeeDetails')
                 return <EmployeeDetailsComponent />
-
+            case 5:
+                console.log("page - 6")
+                history.push('/bills')
+                return <BillsForm />
             default:
                 history.push('/employee');
                 return <HomeComponent />
@@ -119,9 +123,15 @@ const Sidebar = ({ children }) => {
                                 icon: <FileImageFilled />,
                                 label: 'Invoices',
                                 title: 'Invoices',
-                                onClick: () => history.push('/invoices') //todo
-                                // onClick: () => setNavKey(2),
-                                // label: <Link to='/project'>Project</Link>
+                                onClick: () => history.push('/invoices') 
+                            }
+                            ,
+                            {
+                                key: '/bills',
+                                icon: <FileImageFilled />,
+                                label: 'Bills',
+                                title: 'Bills',
+                                onClick: () => history.push('/bills') 
                             }
                         ]}
                     />

@@ -91,7 +91,7 @@ const EmployeeInvoicesForm = () => {
     return (
      <Sidebar>
          <div class="container">
-         <label>Select Date: </label>
+         <label style={{ marginTop: "5px" }}> Select Date: &nbsp;</label>
          <DatePicker class ="left-panel" selected={selectedDate} onChange={handleDateChange} dateFormat="MM/yyyy" placeholderText="Select"  showMonthYearPicker/>
          {/*<span className="calendar-icon" >&#128197;</span>*/}
          <button type="primary"  className='button ' onClick={addNewInvoices}>Add New Invoice</button>

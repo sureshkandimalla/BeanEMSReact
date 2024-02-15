@@ -12,7 +12,7 @@ import EmployeeAddInvoicesForm from './Components/EmployeeAddInvoicesComponent/E
 import EmployeeDetailsComponent from './Components/EmployeeDetailsComponent/EmployeeDetailsComponent';
 import EmployeeProjectDetails from './Components/EmployeeProjectForm/EmployeeProjectDetails';
 import ProjectDetails from './Components/EmployeeProjectForm/ProjectDetails';
-
+import BillsForm from './Components/BillsComponent/BillsForm';
 
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
             <Route path="/employeeDetails" exact component={EmployeeDetailsComponent}></Route>
             <Route path="/employeeProjectDetails" exact component={EmployeeProjectDetails}></Route>
             <Route path="/projectDetails" exact component={ProjectDetails}></Route>
+            <Route path="/bills" exact component={BillsForm}></Route>
           </Switch>
         </div>
         <Footer />
