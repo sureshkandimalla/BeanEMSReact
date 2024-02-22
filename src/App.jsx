@@ -10,6 +10,7 @@ import EmployeeAssignmentForm from './Components/EmployeeAssignmentForm/Employee
 import EmployeeInvoicesForm from './Components/EmployeeInvoicesComponent/EmployeeInvoicesForm';
 import EmployeeAddInvoicesForm from './Components/EmployeeAddInvoicesComponent/EmployeeAddInvoicesForm';
 import EmployeeDetailsComponent from './Components/EmployeeDetailsComponent/EmployeeDetailsComponent';
+import EmployeeFullDetailsComponent from './Components/EmployeeDetailsComponent/EmployeeFullDetailsComponent';
 import EmployeeProjectDetails from './Components/EmployeeProjectForm/EmployeeProjectDetails';
 import ProjectDetails from './Components/EmployeeProjectForm/ProjectDetails';
 import BillsForm from './Components/BillsComponent/BillsForm';
@@ -32,6 +33,7 @@ function App() {
             <Route path="/invoices" exact component={EmployeeInvoicesForm}></Route>
             <Route path="/addInvoices" exact component={EmployeeAddInvoicesForm}></Route>
             <Route path="/employeeDetails" exact component={EmployeeDetailsComponent}></Route>
+            <Route path="/employeeFullDetails" exact component={EmployeeFullDetailsComponent}></Route>
             <Route path="/employeeProjectDetails" exact component={EmployeeProjectDetails}></Route>
             <Route path="/projectDetails" exact component={ProjectDetails}></Route>
             <Route path="/bills" exact component={BillsForm}></Route>

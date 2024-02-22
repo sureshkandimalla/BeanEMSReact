@@ -92,9 +92,6 @@ const TwoPartPage = () => {
         const toggleTabs = (e) => {
           //TODO
         }
-        const modifyTableColumns = (e) => {
-            history.push('/onboarding')
-        }
 
      return (
          <Sidebar>

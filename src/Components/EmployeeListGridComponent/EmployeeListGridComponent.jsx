@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
+import { Link } from 'react-router-dom';
 import data from '../../Component_JSON/EmployeeList';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/styles/ag-grid.css';
@@ -42,14 +43,36 @@ const Grid = () => {
             let updatedColumn = column === 'DOB' ? 'Date of Birth' : column
             updatedColumn = column
             if(column == 'startDate' )
-                updatedColumn='Employment Start Date'
+                updatedColumn='Employment Start Date';
             else if(column == 'endDate')
-                updatedColumn='Employment End Date'
-            return ({ headerName: updatedColumn,
-                        field:  fieldValue, sortable: isSortable, editable: true, filter: 'agTextColumnFilter' })
-        });
-        return columns;
-    }
+                updatedColumn='Employment End Date';
+   
+                return {
+                    headerName: updatedColumn,
+                    field: fieldValue,
+                    sortable: isSortable,
+                    editable: true,
+                    filter: 'agTextColumnFilter',
+                    cellRenderer: (params) => {
+                        if (column === 'First Name' || column === 'Last Name') {
+                            return (
+                                <Link
+                                    to={{
+                                        pathname: '/employeeFullDetails',
+                                        state: { rowData: params.data }
+                                    }}
+                                >
+                                    {params.value}
+                                </Link>
+                            );
+                        } else {
+                            return params.value;
+                        }
+                    }
+                };
+            });
+            return columns;
+        };
 
 
 

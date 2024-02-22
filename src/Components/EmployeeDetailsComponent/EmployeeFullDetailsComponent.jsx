@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
-import TextField from '@material-ui/core/TextField'; 
-import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-enterprise';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import './EmployeeProjectForm.scss';
-import './EmployeeProjectDetails.scss';
+import './EmployeeFullDetailsComponent.scss';
 import Sidebar from "../../Commons/Sidebar/Sidebar";
 import { Col, Row ,Card, Tabs  } from 'antd';
 import { UserOutlined, MailOutlined, PhoneOutlined  } from '@ant-design/icons';
 import { useLocation, useHistory } from 'react-router-dom';
-import bigInt from 'big-integer';
 import EmployeeAddProject from '../EmployeeProjectForm/EmployeeAddProject';
-
+import EmployeePersonnelFilePage from '../EmployeeDetailsComponent/EmployeePersonnelFilePage';
 
 //const style: React.CSSProperties = { background: '#A9A9A9', padding: '8px 0' ,paddingLeft: '8px 0'};
 
@@ -35,40 +31,49 @@ const TwoPartPage = () => {
           const [isLoading, setIsLoading] = useState(true);
           const [error, setError] = useState();
           
-          const apiUrl = 'http://localhost:8080';
-          const endpoint = '/api/v1/employees';
-          const empId = bigInt(rowData.employeeId);
-          // Construct the URL with the path variable
-          const url = `${apiUrl}${endpoint}/${empId}`;
-         
           useEffect(() => {
-            alert(url);
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                  alert(data.firstName);
-                  setResponseData(data);
-                  
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        }, []);
-
+            console.log('rowData:', rowData);
+            setResponseData(rowData);
+        }, [rowData]);
+        
           const { TabPane } = Tabs;
           const history = useHistory();
           const items = [
             {
-                key: 1,
-                label: 'Projects',
-                children: < EmployeeAddProject />
+              key: 1,
+              label: 'PERSONNEL FILE',
+              children: < EmployeePersonnelFilePage />
             },
             {
                 key: 2,
-                label: 'Invoices'
+                label: 'PROJECTS',
+                children: < EmployeeAddProject />
             },
             {
-              key: 3,
-              label: 'LeaveReport'
-          },
+                key: 3,
+                label: 'PAF'
+            },
+            {
+              key: 4,
+              label: 'WA',
+              title: 'WORK AUTHORIZATION'
+            },
+            {
+              key: 5,
+              label: 'FORMS'
+            },
+            {
+              key: 6,
+              label: 'TASKS'
+            },
+            {
+              key: 7,
+              label: 'EVALUATION'
+            },
+            {
+              key: 8,
+              label: 'LEAVE REPORT'
+            },
         ]
         
         const toggleTabs = (e) => {
