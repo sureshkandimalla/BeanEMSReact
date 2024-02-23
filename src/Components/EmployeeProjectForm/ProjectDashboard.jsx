@@ -71,7 +71,7 @@ const ProjectDashboard = ({rowData}) => {
                      </div>
                     <div className="card">
                             <div className="card-content">
-                            <span style={{ color: 'blue', fontSize: '20px'}}>${net}  </span>
+                            <span style={{ color: 'blue', fontSize: '20px'}}>${net()}  </span>
                              <span style={{ fontSize: '15px' }}>Bean Net</span>
                             </div>
                      </div>

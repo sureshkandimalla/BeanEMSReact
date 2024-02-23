@@ -83,6 +83,14 @@ const Sidebar = ({ children }) => {
                         // onCollapse={(value) => console.log('value', value)}
                         items={[
                             {
+                                key: '/dashboard',
+                                icon: <UserOutlined />,
+                                label: 'Dashboard',
+                                title: 'Dashboard',
+                                onClick: () => history.push('/dashboard')
+                            },
+
+                            {
                                 key: '/employee',
                                 icon: <UserOutlined />,
                                 label: 'Employee',
@@ -91,18 +99,18 @@ const Sidebar = ({ children }) => {
                                 onClick: () => history.push('/employee')
                             },
                             {
-                                key: '/employeeDetails',
+                                key: '/vendor',
                                 icon: <UserOutlined />,
-                                label: 'EmployeeDetails',
-                                title: 'EmployeeDetails',
+                                label: 'Vendor',
+                                title: 'Vendor',
                                 // label: <Link to='/employee'>Employee</Link>
-                                onClick: () => history.push('/employeeDetails')
+                                onClick: () => history.push('/vendor')
                             },
                             {
                                 key: '/project',
                                 icon: <VideoCameraOutlined />,
-                                label: 'Project',
-                                title: 'Project',
+                                label: 'Projects',
+                                title: 'Projects',
                                 onClick: () => history.push('/project')
                                 // onClick: () => setNavKey(2),
                                 // label: <Link to='/project'>Project</Link>
