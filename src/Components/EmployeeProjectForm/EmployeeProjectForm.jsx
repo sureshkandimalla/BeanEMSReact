@@ -12,6 +12,7 @@ import ProjectDashboard from '../EmployeeProjectForm/ProjectDashboard';
 const Grid = () => {
 
     const [rowData, setRowData] = useState();
+      const [searchText, setSearchText] = useState('');
 
 
     useEffect(() => {
@@ -33,6 +34,21 @@ const Grid = () => {
         console.log(updatedData)
         return updatedData || [];
     }
+     const handleSearchInputChange = (event) => {
+        setSearchText(event.target.value);
+      };
+
+      const filterData = () => {
+        if (!searchText) {
+          return rowData;
+        }
+
+        return rowData.filter((row) =>
+          Object.values(row).some((value) =>
+            String(value).toLowerCase().includes(searchText.toLowerCase())
+          )
+        );
+        };
 
     const getColumnsDefList = ( isSortable, isEditable, hasFilter) => {
    /// const columnsList = ['Project Name', 'Project Id ','Employee Id', 'Employee Name', 'Client', 'Vendor','Bill Rate', 'Invoice Terms','startDate','endDate','Status','Employee Pay','Expenses','Bean Expenses','Bean Net','Total Hours';
@@ -65,20 +81,29 @@ const Grid = () => {
 
     return (
      <Sidebar>
-        <ProjectDashboard />
-        <div className="ag-theme-alpine employee-List-grid" >
+        <ProjectDashboard rowData={filterData()} />
 
-            <AgGridReact rowData={rowData} columnDefs={getColumnsDefList( true, false)}
+
+        <div className="ag-theme-alpine employee-List-grid" >
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchText}
+                onChange={handleSearchInputChange}
+              />
+                <button type="primary"  className='button ' onClick={filterData}>Search</button>
+
+            <AgGridReact rowData={filterData()} columnDefs={getColumnsDefList( true, false)}
                 domLayout="autoHeight"
                 defaultColDef={{
                     flex: 1,
                     minWidth: 150,
                     resizable: true,
-                    filter: true,
-                    floatingFilter: true
+                    filter: false,
+                    floatingFilter: false
                 }}
                 hiddenByDefault={false}
-                rowGroupPanelShow='always'
+                rowGroupPanelShow='never'
                 pivotPanelShow='always'
 
                 sideBar={{
