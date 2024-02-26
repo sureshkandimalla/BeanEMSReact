@@ -23,6 +23,7 @@
     "antd": "^5.8.4",
     "axios": "^1.4.0",
     "big-integer": "^1.6.52",
+    "moment": "^2.30.1",
     "react": "^17.0.2",
     "react-ag-grid": "^17.0.0",
     "react-datepicker": "^5.0.0",

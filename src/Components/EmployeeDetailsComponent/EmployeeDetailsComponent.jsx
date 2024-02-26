@@ -15,7 +15,7 @@ const Grid = () => {
         ,'Employment Type', 'SSN', 'Gender'];
         //'FIRST NAME','LAST NAME','EMAIL ID','PHONE','EMPLOYEE ID','DOB','GENDER','SSN','DESIGNATION','EMPLOYMENT WORK TYPE','BENEFITS STATUS','TAX TERMS','EMPLOYMENT START DATE','CURRENT WORK STATUS','WORK AUTH START DATE','WORK AUTH END DATE','I94END DATE','HOME ADDRESS','ZIP CODE(HOME ADDRESS)','CURRENT PROJECT TITLE','PROJECT START DATE','PROJECT END DATE','CURRENT WORK LOCATION','ZIP CODE(WORK LOCATION)','WAGE RATE (OFFERED SALARY)','DEPARTMENT','REPORTING TO','REPORTING EMPLOYEES/TRAINEES','BILLING STATUS','LAST MODIFIED BY','LAST MODIFIED DATE',
     useEffect(() => {
-        fetch('http://localhost:8080/api/v1/employees')
+        fetch('http://localhost:8080/api/v1/employees/getAllEmployees')
             .then(response => response.json())
             .then(data => {
                 setRowData(getFlattenedData(data));

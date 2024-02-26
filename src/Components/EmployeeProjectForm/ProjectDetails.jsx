@@ -48,7 +48,7 @@ const TwoPartPage = () => {
           };
  
           const location = useLocation();
-          const { rowData } = location.state;
+          const { rowData } = location.state || {};
           const [responseData, setResponseData] = useState(null);
           const [isLoading, setIsLoading] = useState(true);
           const [error, setError] = useState();

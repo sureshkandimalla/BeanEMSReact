@@ -11,13 +11,14 @@ import CustomElements from './CustomElement.jsx';
 
 
 const Grid = () => {
-
+    
+    const [searchText, setSearchText] = useState('');
     const [rowData, setRowData] = useState();
     const columnsList = ['First Name', 'Last Name', 'Email Id', 'Phone', 'DOB','Employee Id', 'Designation','startDate','endDate'
         ,'Employment Type', 'SSN', 'Gender'];
-        //'FIRST NAME','LAST NAME','EMAIL ID','PHONE','EMPLOYEE ID','DOB','GENDER','SSN','DESIGNATION','EMPLOYMENT WORK TYPE','BENEFITS STATUS','TAX TERMS','EMPLOYMENT START DATE','CURRENT WORK STATUS','WORK AUTH START DATE','WORK AUTH END DATE','I94END DATE','HOME ADDRESS','ZIP CODE(HOME ADDRESS)','CURRENT PROJECT TITLE','PROJECT START DATE','PROJECT END DATE','CURRENT WORK LOCATION','ZIP CODE(WORK LOCATION)','WAGE RATE (OFFERED SALARY)','DEPARTMENT','REPORTING TO','REPORTING EMPLOYEES/TRAINEES','BILLING STATUS','LAST MODIFIED BY','LAST MODIFIED DATE',
+
     useEffect(() => {
-        fetch('http://localhost:8080/api/v1/employees')
+        fetch('http://localhost:8080/api/v1/employees/getAllEmployees')
             .then(response => response.json())
             .then(data => {
                 setRowData(getFlattenedData(data));
@@ -27,7 +28,8 @@ const Grid = () => {
 
     const getFlattenedData = (data) => {
         let updatedData = data.map((dataObj) => {
-            return { ...dataObj, ...dataObj.employeeAddress[0], ...dataObj.employeeAssignments[0] }
+            //return { ...dataObj, ...dataObj.employeeAddress[0], ...dataObj.employeeAssignments[0] }
+            return { ...dataObj }
         });
         return updatedData || [];
     }
@@ -74,18 +76,41 @@ const Grid = () => {
             return columns;
         };
 
-
+        const handleSearchInputChange = (event) => {
+            setSearchText(event.target.value);
+          };
+      
+          const filterData = () => {
+            if (!searchText) {
+              return rowData;
+            }
+      
+            return rowData.filter((row) =>
+              Object.values(row).some((value) =>
+                String(value).toLowerCase().includes(searchText.toLowerCase())
+              )
+            );
+            };
 
     return (
         <div className="ag-theme-alpine employee-List-grid" >
-            <AgGridReact rowData={rowData} columnDefs={getColumnsDefList(columnsList, true, false)}
+            <div class="container">
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchText}
+                        onChange={handleSearchInputChange}
+                    />
+                    <button type="primary" className='button ' onClick={filterData}>Search</button>
+                </div>
+            <AgGridReact rowData={filterData()} columnDefs={getColumnsDefList(columnsList, true, false)}
                 domLayout="autoHeight"
                 defaultColDef={{
                     flex: 1,
                     minWidth: 150,
                     resizable: true,
-                    filter: true,
-                    floatingFilter: true
+                    filter: false,
+                    floatingFilter: false
                 }}
                 hiddenByDefault={false}
                 rowGroupPanelShow='always'

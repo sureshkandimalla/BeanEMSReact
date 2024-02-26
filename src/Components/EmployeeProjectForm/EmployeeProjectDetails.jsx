@@ -36,7 +36,7 @@ const TwoPartPage = () => {
           const [error, setError] = useState();
           
           const apiUrl = 'http://localhost:8080';
-          const endpoint = '/api/v1/employees';
+          const endpoint = '/api/v1/employees/employee';
           const empId = bigInt(rowData.employeeId);
           // Construct the URL with the path variable
           const url = `${apiUrl}${endpoint}/${empId}`;
@@ -59,7 +59,8 @@ const TwoPartPage = () => {
             {
                 key: 1,
                 label: 'Projects',
-                children: < EmployeeAddProject />
+                children: < EmployeeAddProject /> //for popup oldone
+                //children: < ProjectOnBoardingForm/>
             },
             {
                 key: 2,

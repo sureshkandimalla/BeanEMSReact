@@ -8,12 +8,13 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './EmployeeProjectForm.scss';
 import Sidebar from "../../Commons/Sidebar/Sidebar";
 import ProjectDashboard from '../EmployeeProjectForm/ProjectDashboard';
+import { useHistory } from 'react-router-dom';
 
 const Grid = () => {
 
     const [rowData, setRowData] = useState();
       const [searchText, setSearchText] = useState('');
-
+      const history = useHistory();
 
     useEffect(() => {
         fetch('http://localhost:8080/api/v1/getProjects')
@@ -77,7 +78,9 @@ const Grid = () => {
         return columns;
     }
 
-
+    const addNewProject = (e) => {
+      history.push('/projectOnBoarding')
+  }
 
     return (
      <Sidebar>
@@ -85,14 +88,18 @@ const Grid = () => {
 
 
         <div className="ag-theme-alpine employee-List-grid" >
-              <input
-                type="text"
-                placeholder="Search..."
-                value={searchText}
-                onChange={handleSearchInputChange}
-              />
-                <button type="primary"  className='button ' onClick={filterData}>Search</button>
-
+          <div class="container">
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchText}
+              onChange={handleSearchInputChange}
+            />
+            <button type="primary" className='button ' onClick={filterData}>Search</button>
+            <Link to={{ pathname: '/projectOnBoarding', state: { rowData } }}>
+            <button type="primary"  className='button-vendor ' onClick={addNewProject} >Add New Project</button>
+            </Link>
+          </div>
             <AgGridReact rowData={filterData()} columnDefs={getColumnsDefList( true, false)}
                 domLayout="autoHeight"
                 defaultColDef={{

@@ -130,19 +130,19 @@ const EmployeePersonnelFilePage = () => {
             <div className="details-row">
               <div className="field">
                 <label htmlFor="addressLine1">Address Line1</label>
-                <span className="field-value">{rowData.addressLine1}</span>
+                <span className="field-value">{rowData.address ? rowData.address.address : 'NA'}</span>
               </div>
               <div className="field">
                 <label htmlFor="addressLine2">Address Line2</label>
-                <span className="field-value">{rowData.addressLine2}</span>
+                <span className="field-value">{rowData.address ? rowData.address.addressLine2 : 'NA'}</span>
               </div>
               <div className="field">
                 <label htmlFor="City">City,State</label>
-                <span className="field-value">{rowData.City},{rowData.State}</span>
+                <span className="field-value">{rowData.address ? rowData.address.city : 'NA'},{rowData.address ? rowData.address.state : 'NA'}</span>
               </div>
               <div className="field">
                 <label htmlFor="zipCode">Zip Code</label>
-                <span className="field-value">{rowData.zipCode}</span>
+                <span className="field-value">{rowData.address ? rowData.address.zipCode : 'NA'}</span>
               </div>
             </div>
           

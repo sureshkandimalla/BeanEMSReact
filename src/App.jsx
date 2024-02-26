@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './Commons/Header/Header';
 import Footer from './Commons/Footer/Footer';
 import HomeComponent from './Components/HomeComponent/HomeComponent';
-import EmployeeOnBoardingForm from './Components/EmployeeOnBoarding/EmployeeOnBoarding';
+import EmployeeOnBoardingForm from './Components/OnBoardingComponent/EmployeeOnBoarding';
 import EmployeeProjectForm from './Components/EmployeeProjectForm/EmployeeProjectForm';
 import EmployeeAssignmentForm from './Components/EmployeeAssignmentForm/EmployeeAssignmentForm';
 import EmployeeInvoicesForm from './Components/EmployeeInvoicesComponent/EmployeeInvoicesForm';
@@ -14,7 +14,9 @@ import EmployeeFullDetailsComponent from './Components/EmployeeDetailsComponent/
 import EmployeeProjectDetails from './Components/EmployeeProjectForm/EmployeeProjectDetails';
 import ProjectDetails from './Components/EmployeeProjectForm/ProjectDetails';
 import BillsForm from './Components/BillsComponent/BillsForm';
-
+import VendorForm from './Components/VendorComponent/VendorForm';
+import VendorOnBoardingForm from './Components/OnBoardingComponent/VendorOnBoarding';
+import ProjectOnBoardingForm from './Components/OnBoardingComponent/ProjectOnBoarding';
 
 function App() {
 
@@ -37,6 +39,9 @@ function App() {
             <Route path="/employeeProjectDetails" exact component={EmployeeProjectDetails}></Route>
             <Route path="/projectDetails" exact component={ProjectDetails}></Route>
             <Route path="/bills" exact component={BillsForm}></Route>
+            <Route path="/vendor" exact component={VendorForm}></Route>
+            <Route path="/vendorOnBoarding" component={VendorOnBoardingForm}></Route>
+            <Route path="/projectOnBoarding" component={ProjectOnBoardingForm}></Route>
           </Switch>
         </div>
         <Footer />

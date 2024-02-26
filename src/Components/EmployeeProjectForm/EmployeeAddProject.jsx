@@ -7,13 +7,14 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './EmployeeProjectForm.scss';
 import './EmployeeProjectDetails.scss';
 import Sidebar from "../../Commons/Sidebar/Sidebar";
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation, useHistory, Link } from 'react-router-dom'
 
 const EmpPopupForm = () => {
 
     //Below from EmployeeProjectForm
     const location = useLocation();
     const { rowData } = location.state;
+    const history = useHistory();
 
         const [isPopupOpen, setIsPopupOpen] = useState();
                 
@@ -91,6 +92,9 @@ const EmpPopupForm = () => {
         
         };
 
+        const addNewProject = (e) => {
+            history.push('/projectOnBoarding')
+        }
         const handleOpenPopup = () => {
         setIsPopupOpen(true);
         };
@@ -137,7 +141,7 @@ const EmpPopupForm = () => {
 
                 //  make an API call to insert new project details into db
                 // Example using fetch:
-                fetch('http://localhost:8080/api/v1/projects', {
+                fetch('http://localhost:8080/api/v1/projects/saveProject', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -229,10 +233,15 @@ const EmpPopupForm = () => {
 
 
             return (
-                <div id='Popupbutton'>
-                <button onClick={handleOpenPopup}>Add New Project</button>
-                {isPopupOpen && <Popup onClose={handleClosePopup} onSubmit={handleFormSubmit} />}
-                </div>
+
+                <Link to={{ pathname: '/projectOnBoarding', state: { rowData } }}>
+                <button>Add New Project</button>
+              </Link>
+
+                // <div id='Popupbutton'>
+                // <button onClick={handleOpenPopup}>Add New Project</button>
+                // {isPopupOpen && <Popup onClose={handleClosePopup} onSubmit={handleFormSubmit} />}
+                // </div>
             );
 }
 

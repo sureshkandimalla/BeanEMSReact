@@ -9,7 +9,7 @@ import DatePicker from 'react-datepicker';
 
 const EmployeeAssignmentForm = () => {
    
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [searchText, setSearchText] = useState('');
     const [rowData, setRowData] = useState([]);
 
     useEffect(() => {
@@ -55,32 +55,56 @@ const EmployeeAssignmentForm = () => {
         domLayout: 'autoHeight',
       };
 
+      const handleSearchInputChange = (event) => {
+        setSearchText(event.target.value);
+      };
+  
+      const filterData = () => {
+        if (!searchText) {
+          return rowData;
+        }
+  
+        return rowData.filter((row) =>
+          Object.values(row).some((value) =>
+            String(value).toLowerCase().includes(searchText.toLowerCase())
+          )
+        );
+        };
 
     return (
         <Sidebar>
-        {/*<div class="container" style={{ marginTop: "0px" }}>
+            {/*<div class="container" style={{ marginTop: "0px" }}>
             <label style={{ marginTop: "5px" }}> Select Date: &nbsp;</label>
             <DatePicker class ="left-panel" selected={selectedDate} onChange={handleDateChange} dateFormat="MM/yyyy" placeholderText="Select"  showMonthYearPicker/>
         </div>*/}
-   
-   
-           <div className="ag-theme-alpine employee-List-grid" >
-           { rowData && rowData.length > 0 ? (
-             <AgGridReact rowData={rowData} columnDefs={getColumnsDefList()} gridOptions={gridOptions}
-             defaultColDef={{
-               flex: 1,
-               minWidth: 150,
-               resizable: true,
-               filter: true,
-               floatingFilter: true
-           }}
+
+
+            <div className="ag-theme-alpine employee-List-grid" >
+                <div class="container">
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchText}
+                        onChange={handleSearchInputChange}
                     />
-           ) : (
-               <p>No Records Found...</p>
-             )}
-           </div>
-            </Sidebar>
-       )
+                    <button type="primary" className='button ' onClick={filterData}>Search</button>
+                </div>
+                {rowData && rowData.length > 0 ? (
+                    <AgGridReact rowData={filterData()} columnDefs={getColumnsDefList()} gridOptions={gridOptions}
+                        defaultColDef={{
+                            flex: 1,
+                            minWidth: 150,
+                            resizable: true,
+                            filter: false,
+                            floatingFilter: false
+                        }}
+                    />
+                ) : (
+                    <p>No Records Found...</p>
+                )}
+            </div>
+        </Sidebar>
+    )
 }
 
 export default EmployeeAssignmentForm;

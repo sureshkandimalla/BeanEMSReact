@@ -12,7 +12,7 @@ import EmployeePersonnelFilePage from '../EmployeeDetailsComponent/EmployeePerso
 
 //const style: React.CSSProperties = { background: '#A9A9A9', padding: '8px 0' ,paddingLeft: '8px 0'};
 
-const TwoPartPage = () => {
+const EmployeeFullDetails = () => {
     const divStyle = {
     //     height: '95%', // Set the desired height in pixels or any other valid CSS unit
         border: '1px solid #ccc',
@@ -80,10 +80,15 @@ const TwoPartPage = () => {
           //TODO
         }
 
+        function toggleContent() {
+          alert("toogle");
+           
+        }
      return (
       <Sidebar>
       <div className="two-parts-container">
           <div className="part left-part">
+          <section className="personal-info">
               {responseData && (
                   <Card className="responsive-card" style={{ width: '100%' }}>
                       <p>
@@ -101,7 +106,38 @@ const TwoPartPage = () => {
                       </p>
                   </Card>
               )}
-          </div>
+          
+               <div className="details-row"  style={{ marginTop: '10px' }}>
+                 <div className="field">
+                   <label htmlFor="emailId">Work Authorization Type</label>
+                   <span className="field-value">{rowData.visa}</span>
+                 </div>
+                 <div className="field">
+                   <label htmlFor="phone">Tax Term</label>
+                   <span className="field-value">{rowData.taxTerm}</span>
+                 </div>
+               </div>
+               <div className="details-row" style={{ marginTop: '10px' }}>
+                 <div className="field">
+                   <label htmlFor="emailId">H1B validity</label>
+                   <span className="field-value"> {rowData.h1bValidity}</span>
+                 </div>
+                 <div className="field">
+                   <label htmlFor="phone">Current Project Validity</label>
+                   <span className="field-value">null</span>
+                 </div>
+               </div>
+               <div className="details-row" style={{ marginTop: '10px' }}>
+                 <div className="field">
+                   <label htmlFor="emailId">Employment Start Date</label>
+                   <span className="field-value">{rowData.startDate}</span>
+                 </div>
+               </div>
+               <hr className="dotted-line" />
+               <div class="labelArrow" onclick="toggleContent()">Document Alerts <span class="arrow">&#9660;</span></div>
+              <div class="content" id="content">Content here</div>
+             </section>
+           </div>
           <div className="gap"></div> {/* Gap between the two parts */}
           <div className="part right-part">
               <Tabs className='bean-home-tabs' defaultActiveKey="1" onChange={toggleTabs} items={items}>
@@ -115,5 +151,5 @@ const TwoPartPage = () => {
 
 
 
-export default TwoPartPage;
+export default EmployeeFullDetails;
 
